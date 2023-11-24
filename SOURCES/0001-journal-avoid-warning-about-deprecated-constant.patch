@@ -1,0 +1,22 @@
+From 63473b65d0c10268a9e2c9485313c4584027e67e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Zbigniew=20J=C4=99drzejewski-Szmek?= <zbyszek@in.waw.pl>
+Date: Wed, 11 Nov 2020 22:36:04 +0100
+Subject: [PATCH 1/2] journal: avoid warning about deprecated constant
+
+---
+ systemd/_reader.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/systemd/_reader.c b/systemd/_reader.c
+index c9aa11d43c..8de7f6a963 100644
+--- a/systemd/_reader.c
++++ b/systemd/_reader.c
+@@ -1339,7 +1339,7 @@ init_reader(void)
+             PyModule_AddIntConstant(m, "LOCAL_ONLY", SD_JOURNAL_LOCAL_ONLY) ||
+             PyModule_AddIntConstant(m, "RUNTIME_ONLY", SD_JOURNAL_RUNTIME_ONLY) ||
+             PyModule_AddIntConstant(m, "SYSTEM", SD_JOURNAL_SYSTEM) ||
+-            PyModule_AddIntConstant(m, "SYSTEM_ONLY", SD_JOURNAL_SYSTEM_ONLY) ||
++            PyModule_AddIntConstant(m, "SYSTEM_ONLY", SD_JOURNAL_SYSTEM) ||
+             PyModule_AddIntConstant(m, "CURRENT_USER", SD_JOURNAL_CURRENT_USER) ||
+             PyModule_AddIntConstant(m, "OS_ROOT", SD_JOURNAL_OS_ROOT) ||
+             PyModule_AddStringConstant(m, "__version__", PACKAGE_VERSION)) {
