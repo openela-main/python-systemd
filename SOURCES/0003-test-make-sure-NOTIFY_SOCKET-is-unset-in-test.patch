@@ -1,0 +1,25 @@
+From 21e0cee30e5550cd6c9afa8c4cdedbcfdfca8480 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Zbigniew=20J=C4=99drzejewski-Szmek?= <zbyszek@in.waw.pl>
+Date: Thu, 12 Nov 2020 17:08:02 +0100
+Subject: [PATCH] test: make sure $NOTIFY_SOCKET is unset in test
+
+When running the tests in Fedora's mock, the test would
+fail because NOTIFY_SOCKET is set to /run/systemd/nspawn/notify, and
+we get a permission error.
+---
+ systemd/test/test_daemon.py | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/systemd/test/test_daemon.py b/systemd/test/test_daemon.py
+index 1ddb55e94d..ff9e086e72 100644
+--- a/systemd/test/test_daemon.py
++++ b/systemd/test/test_daemon.py
+@@ -257,6 +257,8 @@ def test_listen_fds_default_unset():
+     assert listen_fds() == []
+ 
+ def test_notify_no_socket():
++    os.environ.pop('NOTIFY_SOCKET', None)
++
+     assert notify('READY=1') is False
+     with skip_enosys():
+         assert notify('FDSTORE=1', fds=[]) is False
