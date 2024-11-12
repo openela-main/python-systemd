@@ -1,6 +1,6 @@
 Name:           python-systemd
 Version:        234
-Release:        18%{?dist}
+Release:        19%{?dist}
 Summary:        Python module wrapping systemd functionality
 
 License:        LGPLv2+
@@ -35,7 +35,6 @@ Summary:        %{summary}
 Provides:       systemd-python3 = %{version}-%{release}
 Provides:       systemd-python3%{?_isa} = %{version}-%{release}
 Obsoletes:      systemd-python3 < 230
-Recommends:	%{name}-doc
 
 %description -n python3-systemd %_description
 
@@ -79,6 +78,9 @@ make PYTHON=%{__python3} check
 %doc %{_pkgdocdir}/html
 
 %changelog
+* Mon Jun 10 2024 Jan Macku <jamacku@redhat.com> - 234-19
+- Remove weak dependency on doc subpackage (RHEL-5835)
+
 * Tue Aug 10 2021 Mohan Boddu <mboddu@redhat.com> - 234-18
 - Rebuilt for IMA sigs, glibc 2.34, aarch64 flags
   Related: rhbz#1991688
